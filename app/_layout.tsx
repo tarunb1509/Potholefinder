@@ -6,11 +6,12 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import MobileFrame from '@/components/MobileFrame';
 
 export { ErrorBoundary } from 'expo-router';
 
 export const unstable_settings = {
-  initialRouteName: '(tabs)',
+  initialRouteName: 'index',
 };
 
 SplashScreen.preventAutoHideAsync();
@@ -42,17 +43,15 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen
-          name="report/[id]"
-          options={{
-            headerShown: true,
-            title: 'Report Details',
-            headerBackTitle: 'Map',
-          }}
-        />
-      </Stack>
+      <MobileFrame>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen name="camera" />
+          <Stack.Screen name="submit" options={{ headerShown: true, title: 'Submit Report', headerBackTitle: 'Back' }} />
+          <Stack.Screen name="map" options={{ headerShown: true, title: 'Pothole Map', headerBackTitle: 'Home' }} />
+          <Stack.Screen name="report/[id]" options={{ headerShown: true, title: 'Report Details', headerBackTitle: 'Map' }} />
+        </Stack>
+      </MobileFrame>
     </ThemeProvider>
   );
 }

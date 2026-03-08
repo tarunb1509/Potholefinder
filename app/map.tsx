@@ -60,7 +60,7 @@ export default function MapScreen() {
       if (error) throw error;
       setReports((data as PotholeReport[]) ?? []);
     } catch {
-      // Silently fail — Supabase may not be configured yet
+      // Silently fail
     } finally {
       setLoading(false);
     }
