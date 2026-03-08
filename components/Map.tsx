@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
 import { PotholeReport, MapRegion } from '@/lib/types';
+import { ensureLeafletCSS } from '@/lib/leaflet-css';
 
 const OSM_TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const OSM_ATTRIBUTION =
@@ -30,6 +31,7 @@ export default function PotholeMap({ reports, region, onMarkerPress }: MapProps)
   const [leafletModules, setLeafletModules] = useState<any>(null);
 
   useEffect(() => {
+    ensureLeafletCSS();
     (async () => {
       const L = await import('leaflet');
       const RL = await import('react-leaflet');

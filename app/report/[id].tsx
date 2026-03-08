@@ -11,6 +11,7 @@ import {
 import { useLocalSearchParams, Stack } from 'expo-router';
 import { supabase } from '@/lib/supabase';
 import { PotholeReport } from '@/lib/types';
+import { ensureLeafletCSS } from '@/lib/leaflet-css';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const OSM_TILE_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -25,6 +26,7 @@ function MiniMap({ latitude, longitude }: { latitude: number; longitude: number 
   const [mods, setMods] = useState<any>(null);
 
   useEffect(() => {
+    ensureLeafletCSS();
     (async () => {
       const L = await import('leaflet');
       const RL = await import('react-leaflet');
