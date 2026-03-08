@@ -16,6 +16,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as FileSystem from 'expo-file-system';
 import { supabase, STORAGE_BUCKET } from '@/lib/supabase';
 import { NewPotholeReport } from '@/lib/types';
+import { addMyReportId } from '@/lib/my-reports';
 
 function decode(base64: string): Uint8Array {
   const binaryString = atob(base64);
@@ -82,15 +83,19 @@ export default function SubmitScreen() {
         description: description.trim(),
       };
 
-      const { error: insertError } = await supabase
+      const { data: insertData, error: insertError } = await supabase
         .from('reports')
-        .insert(newReport);
+        .insert(newReport)
+        .select('id')
+        .single();
 
       if (insertError) throw insertError;
 
-      Alert.alert('Report Submitted', 'Thank you for reporting this pothole!', [
-        { text: 'OK', onPress: () => router.replace('/') },
-      ]);
+      if (insertData?.id) {
+        await addMyReportId(insertData.id);
+      }
+
+      router.replace('/thankyou');
     } catch (err: any) {
       Alert.alert('Upload Failed', err.message ?? 'Something went wrong.');
     } finally {

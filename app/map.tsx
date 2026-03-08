@@ -118,6 +118,14 @@ export default function MapScreen() {
           <Text style={styles.legendLabel}>Resolved</Text>
         </View>
       </View>
+
+      <TouchableOpacity
+        style={styles.reportedByMeButton}
+        activeOpacity={0.85}
+        onPress={() => router.push('/gallery')}
+      >
+        <Text style={styles.reportedByMeText}>Reported by me</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -198,5 +206,24 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#555',
     fontWeight: '500',
+  },
+  reportedByMeButton: {
+    position: 'absolute',
+    bottom: 24,
+    right: 16,
+    backgroundColor: '#FF6B35',
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  reportedByMeText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 14,
   },
 });

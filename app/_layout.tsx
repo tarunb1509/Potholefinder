@@ -48,8 +48,10 @@ function RootLayoutNav() {
           <Stack.Screen name="index" />
           <Stack.Screen name="camera" />
           <Stack.Screen name="submit" options={{ headerShown: true, title: 'Submit Report', headerBackTitle: 'Back' }} />
+          <Stack.Screen name="thankyou" />
           <Stack.Screen name="map" options={{ headerShown: true, title: 'Pothole Map', headerBackTitle: 'Home' }} />
-          <Stack.Screen name="report/[id]" options={{ headerShown: true, title: 'Report Details', headerBackTitle: 'Map' }} />
+          <Stack.Screen name="gallery" options={{ headerShown: true, title: 'Reported by me', headerBackTitle: 'Map' }} />
+          <Stack.Screen name="report/[id]" options={{ headerShown: true, title: 'Report Details', headerBackTitle: 'Back' }} />
         </Stack>
       </MobileFrame>
     </ThemeProvider>
